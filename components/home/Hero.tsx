@@ -17,7 +17,7 @@ export function Hero() {
         className="glass hairline mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium text-gold"
       >
         <Sparkles className="h-3.5 w-3.5" />
-        面談突破者だけの限定ライブラリ
+        面談後限定特典
       </motion.span>
 
       <motion.h1
@@ -26,19 +26,8 @@ export function Hero() {
       >
         <span className="text-gradient-cool">AI副業2.0</span>
         <br />
-        <span className="text-shimmer">Bonus Box</span>
+        <span className="text-shimmer">豪華5大特典</span>
       </motion.h1>
-
-      <motion.p
-        variants={fadeUp}
-        className="mt-8 max-w-xl text-balance text-base leading-relaxed text-[color:var(--muted)] sm:text-lg"
-      >
-        PDFを配るのではなく、
-        <span className="text-[color:var(--fg)]">学びながら・コピペしながら</span>
-        その場で使える。
-        <br className="hidden sm:block" />
-        あなたのためだけの、実践型AIライブラリへようこそ。
-      </motion.p>
 
       <motion.div
         variants={fadeUp}
