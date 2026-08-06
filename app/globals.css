@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050816;
+  --fg: #eef2ff;
+  --muted: #9aa6c4;
+  --gold: #e7c873;
+  --cyan: #38e1d6;
+  --blue: #4f7cff;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+}
+
+/* ライトモード（高級感を保つソフトなオフホワイト） */
+.light {
+  --bg: #f6f7fb;
+  --fg: #0c1330;
+  --muted: #566089;
+  --glass-border: rgba(12, 19, 48, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.65);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(12, 19, 48, 0.15);
+}
+
+@layer components {
+  /* ガラスカード基盤 */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* ゴールドのグラデーション文字 */
+  .text-gradient-gold {
+    background: linear-gradient(120deg, #f3dfa2 0%, #e7c873 40%, #c9a24b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-cool {
+    background: linear-gradient(120deg, #eef2ff 0%, #9fc0ff 50%, #38e1d6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* シマー（見出しの光沢） */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--fg) 0%,
+      var(--gold) 25%,
+      var(--fg) 50%,
+      var(--gold) 75%,
+      var(--fg) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  /* 発光する薄いヘアライン枠 */
+  .hairline {
+    position: relative;
+  }
+  .hairline::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      130deg,
+      rgba(231, 200, 115, 0.5),
+      rgba(56, 225, 214, 0.12) 40%,
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* モーション削減設定を尊重 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
