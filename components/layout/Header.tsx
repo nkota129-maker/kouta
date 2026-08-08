@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Search, Heart, Clock, Moon, Sun, Command } from "lucide-react";
+import { Search, Heart, Clock, Moon, Sun, Command, PenTool } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 import { useCommandPalette } from "@/lib/hooks/useCommandPalette";
@@ -52,6 +52,32 @@ export function Header() {
 
           {/* 右ナビ */}
           <nav className="flex items-center gap-1">
+            {/* 記事ジェネレーターへの導線 */}
+            <Link
+              href="/generator"
+              className={cn(
+                "mr-1 hidden items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-semibold transition-colors sm:flex",
+                pathname === "/generator"
+                  ? "border-gold/50 bg-gold/15 text-gold"
+                  : "border-gold/25 bg-gold/[0.06] text-gold hover:bg-gold/15",
+              )}
+            >
+              <PenTool className="h-4 w-4" />
+              記事生成
+            </Link>
+            <Link
+              href="/generator"
+              aria-label="note記事ジェネレーター"
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full transition-colors sm:hidden",
+                pathname === "/generator"
+                  ? "bg-gold/15 text-gold"
+                  : "text-[color:var(--muted)] hover:bg-white/5 hover:text-[color:var(--fg)]",
+              )}
+            >
+              <PenTool className="h-[18px] w-[18px]" />
+            </Link>
+
             {navItems.map((item) => {
               const active = pathname === item.href;
               const showBadge =
